@@ -28,7 +28,7 @@ const ScrollToTop: React.FC = () => {
 
           <button
             onClick={scrollToTop}
-            className="p-3 rounded-full bg-primary hover:bg-primary-hover text-white shadow-lg z-50"
+            className="p-3 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg z-50"
 
           >
             <ChevronUp className="h-5 w-5" />

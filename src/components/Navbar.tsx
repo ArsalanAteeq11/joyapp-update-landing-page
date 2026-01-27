@@ -12,12 +12,32 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+
+      // Detect active section
+      const sections = navLinks.map(link => link.href.substring(1));
+      let currentSection = "";
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the section is near the top of the viewport
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            currentSection = section;
+            break;
+          }
+        }
+      }
+      setActiveSection(currentSection);
     };
+
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -43,16 +63,23 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link, index) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="relative font-medium text-sm text-gray-300 hover:text-white transition-colors duration-300"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.substring(1);
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={`relative group font-medium text-sm transition-colors duration-300 ${isActive ? "text-white" : "text-gray-300 hover:text-white"
+                      }`}
+                  >
+                    {link.name}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive ? "w-full text-primary" : "w-0 group-hover:w-full"
+                        }`}
+                    ></span>
+                  </a>
+                );
+              })}
             </div>
 
             {/* CTA Button */}
@@ -99,16 +126,20 @@ const Navbar = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col gap-6">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-lg font-semibold text-foreground hover:text-primary transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                ))}
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.href.substring(1);
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      className={`text-lg font-semibold transition-colors ${isActive ? "text-primary" : "text-foreground hover:text-primary"
+                        }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </a>
+                  );
+                })}
                 <div className="h-px bg-gray-100 w-full my-2"></div>
                 <a
                   href="#pricing"

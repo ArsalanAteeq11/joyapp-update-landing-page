@@ -1,79 +1,103 @@
 import { motion } from "framer-motion";
 import {
+  ArrowRight,
   Facebook,
-  Twitter,
   Instagram,
   Linkedin,
-  Send,
-  ArrowRight
+  Mail
 } from "lucide-react";
 
-const footerLinks = {
-  Product: ["Features", "Pricing", "Integrations", "Updates"],
-  Company: ["About Us", "Careers", "Press", "Blog"],
-  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
-};
+// Custom X (formerly Twitter) icon component
+const XIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    className={className}
+    fill="currentColor"
+  >
+    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.494h2.039L6.486 3.24H4.298l13.311 17.407z" />
+  </svg>
+);
+
+const socialLinks = [
+  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: XIcon, href: "#", label: "X" },
+];
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-gray text-muted pt-20 pb-8 border-t border-white/5">
-      <div className="container-narrow mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-          {/* Brand & Newsletter Column */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-4">
+    <footer className="relative bg-dark-gray text-white pt-12 sm:pt-14 lg:pt-16 overflow-hidden border-t border-white/5">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
+
+      <div className="container-narrow mx-auto px-4 sm:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col lg:flex-row items-start justify-between gap-12 "
+        >
+          {/* Brand Section */}
+          <div className="max-w-xl">
+            <div className="flex sm:flex-row flex-col items-start gap-3">
               <img src="/logo.png" alt="Joy App" className="h-14 w-auto" />
-              <p className="text-muted max-w-sm leading-relaxed">
-                Transforming property management with smart technology and exceptional user experience. Making living better for everyone.
+              <p className="text-white/80 text-md sm:text-lg">
+                Transforming property management with smart technology and exceptional user experience. Making living better for tenants.
               </p>
             </div>
 
-            <div className="relative max-w-sm">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 pr-12 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all placeholder:text-muted-foreground/50"
-              />
-              <button className="absolute right-1.5 top-1.5 p-2 bg-primary rounded-full text-white hover:bg-primary-hover transition-colors">
-                <ArrowRight className="w-4 h-4" />
-              </button>
+            {/* Social Links */}
+            <div className="flex items-center gap-4 pt-4">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  whileHover={{ y: -4, scale: 1.1 }}
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-primary hover:text-white transition-all duration-300 border border-white/10"
+                >
+                  <social.icon className="w-5 h-5" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* Newsletter Section */}
+          <div className="w-full lg:max-w-lg space-y-3">
+            <div className="space-y-2">
+              <p className="text-white/80">Get the latest updates and property insights delivered to your inbox.</p>
             </div>
 
-
-          </div>
-
-          {/* Spacer */}
-          <div className="lg:col-span-1" />
-
-          {/* Links Columns */}
-          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-8">
-            {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title} className="space-y-4">
-                <h4 className="font-display font-semibold text-muted text-md">
-                  {title}
-                </h4>
-                <ul className="space-y-3">
-                  {links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-muted hover:text-primary transition-colors text-sm inline-block"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                <Mail className="w-5 h-5 text-white/40 group-focus-within:text-primary transition-colors" />
               </div>
-            ))}
-          </div>
-        </div>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-14 py-4 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+              />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="absolute right-2 top-2 bottom-2 px-4 bg-primary rounded-xl text-white hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </div>
 
-        {/* Divider & Copyright */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-          <p className="text-muted text-sm">
-            © {new Date().getFullYear()} BITS. Built with ❤️ in Qatar
+          </div>
+        </motion.div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 py-8 border-t border-white/10 flex  justify-center items-center gap-6">
+          <p className="text-white/80 text-sm font-medium">
+            © {new Date().getFullYear()} BITS.Built with ❤️ in Qatar
           </p>
+
+
         </div>
       </div>
     </footer>

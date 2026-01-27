@@ -11,7 +11,7 @@ const partners = [
 
 const TrustedBy = () => {
   return (
-    <section className="py-16 bg-background relative overflow-hidden">
+    <section className="py-12 sm:py-14 lg:py-16 bg-background relative overflow-hidden">
       <div className="container-custom px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -29,7 +29,7 @@ const TrustedBy = () => {
         <div className="relative">
           <div className="flex overflow-hidden w-full h-full">
             <motion.div
-              className="flex gap-12 md:gap-20"
+              className="flex gap-6"
               animate={{ x: ["0%", "-50%"] }}
               transition={{
                 duration: 20,

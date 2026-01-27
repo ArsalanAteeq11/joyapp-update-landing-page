@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
-  TrendingUp,
   Users,
   Eye,
   DollarSign,
@@ -13,26 +12,27 @@ import {
   Bell,
   FileText,
   CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 
 const features = [
   {
-    icon: TrendingUp,
-    title: "Predict Tenant Issues Early",
+    icon: AlertCircle,
+    title: "Smart Tenant Issue Tracking",
     description:
-      "Identify dissatisfaction trends before tenants decide to leave, using smart insights from real data.",
+      "Instant issue reporting with smart data insights to resolve tenant concerns before they escalate.",
   },
   {
     icon: Users,
-    title: "Get More Done with the Same Team",
+    title: "Maximize Workforce Productivity",
     description:
       "Assign tasks faster, track progress easily, and reduce staff downtime.",
   },
   {
     icon: Eye,
-    title: "Full Visibility for Tenants",
+    title: "Real-Time Transparency Portal",
     description:
-      "Tenants can see request status, updates, and responses — no more endless follow-ups.",
+      "Tenants can see request status, updates, and responses no more endless follow-ups.",
   },
   {
     icon: DollarSign,
@@ -44,7 +44,7 @@ const features = [
     icon: Shield,
     title: "Structured Complaint Handling",
     description:
-      "Every issue follows a clear workflow — logged, assigned, resolved, and reviewed.",
+      "Every issue follows a clear workflow logged, assigned, resolved, and reviewed.",
   },
   {
     icon: Sparkles,
@@ -95,7 +95,7 @@ const FeaturesGrid = () => {
   const [showAll, setShowAll] = useState(false);
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
-  const visibleFeatures = showAll ? features : features.slice(0, 6);
+  const visibleFeatures = showAll ? features : features.slice(0, 8);
 
   const handleToggle = () => {
     setShowAll((prev) => !prev);
@@ -124,7 +124,7 @@ const FeaturesGrid = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="text-center max-w-4xl mx-auto mb-12"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-orange-light text-primary font-semibold text-sm mb-6">
             Features
@@ -134,13 +134,13 @@ const FeaturesGrid = () => {
             <span className="text-gradient-orange">Challenges</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Everything you need to manage properties smoothly — without
+            Everything you need to manage properties smoothly without
             spreadsheets, long follow-ups, or confusion.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {visibleFeatures.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -148,18 +148,21 @@ const FeaturesGrid = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+              className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-orange-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
 
-              <div className="w-14 h-14 rounded-xl bg-orange-50 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                <feature.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-300" />
+              <div className="flex flex-col sm:flex-row items-center  gap-4 mb-4">
+
+                <div className="p-3 rounded-xl bg-orange-50 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                  <feature.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="font-display text-lg text-center sm:text-left font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                  {feature.title}
+                </h3>
               </div>
 
-              <h3 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                {feature.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground text-center sm:text-left leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>

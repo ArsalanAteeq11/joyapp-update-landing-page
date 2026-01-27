@@ -6,7 +6,7 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: "Dear Joy Team,  Please contact me and I would like to know more about your Joy App.",
+    message: "Dear Joy Team, Please contact me I would like to know more about your Joy App.",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -45,48 +45,43 @@ const ContactSection = () => {
 
               {/* Contact Details */}
               <div className="space-y-6 mb-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-orange-light flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-primary" />
+                <a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=info@bitechqa.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group cursor-pointer w-fit"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-orange-light flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                    <Mail className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
-                    <p className="text-muted-foreground">info@bitechqa.com</p>
+                    <p className="text-muted-foreground group-hover:text-primary transition-colors duration-300">
+                      info@bitechqa.com
+                    </p>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-orange-light flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-primary" />
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=AL+Muftah+Plaza,+Al+Rayyan+Road,+Doha,+Qatar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group cursor-pointer w-fit"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-orange-light flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                    <MapPin className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Address</p>
-                    <p className="text-muted-foreground">AL Muftah Plaza, Al Rayyan Road, Doha,Qatar</p>
+                    <p className="text-muted-foreground group-hover:text-primary transition-colors duration-300">
+                      AL Muftah Plaza, Al Rayyan Road, Doha, Qatar
+                    </p>
                   </div>
-                </div>
+                </a>
               </div>
 
-              {/* Social Links */}
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-              </div>
+
             </motion.div>
           </div>
 
@@ -109,10 +104,10 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder=" "
-                      className="peer w-full bg-background border border-border rounded-xl px-4 pt-6 pb-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      className="peer w-full bg-background border border-border rounded-xl px-4 pt-6 pb-2 text-medium-gray focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                       required
                     />
-                    <label className="absolute left-4 top-2 text-xs text-muted-foreground peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs transition-all">
+                    <label className="absolute left-4 top-2 text-xs text-dark-gray peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs transition-all">
                       Your Name
                     </label>
                   </div>
@@ -125,10 +120,10 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder=" "
-                      className="peer w-full bg-background border border-border rounded-xl px-4 pt-6 pb-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      className="peer w-full bg-background border border-border rounded-xl px-4 pt-6 pb-2 text-medium-gray focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                       required
                     />
-                    <label className="absolute left-4 top-2 text-xs text-muted-foreground peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs transition-all">
+                    <label className="absolute left-4 top-2 text-xs text-dark-gray peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs transition-all">
                       Email Address
                     </label>
                   </div>
@@ -143,10 +138,10 @@ const ContactSection = () => {
                       onChange={handleChange}
                       placeholder=" "
                       rows={4}
-                      className="peer w-full bg-background border border-border rounded-xl px-4 pt-6 pb-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      className="peer w-full bg-background border border-border rounded-xl px-4 pt-6 pb-2 text-medium-gray focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
                       required
                     />
-                    <label className="absolute left-4 top-2 text-xs text-muted-foreground peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs transition-all">
+                    <label className="absolute left-4 top-2 text-xs text-dark-gray peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs transition-all">
                       Your Message
                     </label>
                   </div>

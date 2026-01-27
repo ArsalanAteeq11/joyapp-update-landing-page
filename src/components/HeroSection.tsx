@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative flex items-center pt-20 overflow-hidden bg-background mt-16">
+    <section className="relative flex items-center overflow-hidden bg-background mt-16 pt-20 pb-8">
       {/* Abstract Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-orange-200/40 rounded-full blur-[100px] animate-float-delayed" />
@@ -115,8 +115,13 @@ const HeroSection = () => {
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex -space-x-2">
-                        {[1, 2, 3].map(i => (
-                          <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200" />
+                        {[1, 2, 3].map((i) => (
+                          <img
+                            key={i}
+                            src={`https://i.pravatar.cc/150?u=${i + 10}`}
+                            alt={`Tenant ${i}`}
+                            className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm transition-transform hover:scale-110"
+                          />
                         ))}
                       </div>
                       <div>

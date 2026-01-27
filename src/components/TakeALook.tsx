@@ -31,7 +31,7 @@ const TakeALook = () => {
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
               Our intuitive interface puts everything you need at your fingertips.
-              Manage properties, communicate with tenants, and track performance—all in one place.
+              Manage properties, communicate with tenants, and track performance all in one place.
             </p>
 
             {/* Feature List */}
