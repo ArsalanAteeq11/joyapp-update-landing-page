@@ -43,7 +43,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="max-w-xl">
             <div className="flex sm:flex-row flex-col items-start gap-3">
-              <img src="/logo.png" alt="Joy App" className="h-14 w-auto" />
+              <img src="/joy-logo.png" alt="Joy App" className="h-14 w-auto rounded-xl" />
               <p className="text-white/80 text-md sm:text-lg">
                 Transforming property management with smart technology and exceptional user experience. Making living better for tenants.
               </p>
