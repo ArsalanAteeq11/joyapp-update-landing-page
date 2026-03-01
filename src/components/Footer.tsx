@@ -6,6 +6,7 @@ import {
   Linkedin,
   Mail
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Custom X (formerly Twitter) icon component
 const XIcon = ({ className }: { className?: string }) => (
@@ -92,12 +93,18 @@ const Footer = () => {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 py-8 border-t border-white/10 flex  justify-center items-center gap-6">
-          <p className="text-white/80 text-sm font-medium">
-            © {new Date().getFullYear()} BITS.Built with ❤️ in Qatar
-          </p>
+        <div className="mt-12 py-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 items-center gap-6 text-white/80 text-sm font-medium">
+          <div className="text-center md:text-left">
+            <Link to="/privacy-policy" className="hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
 
+          <div className="text-center order-first md:order-none">
+            <p>© {new Date().getFullYear()} BITS. Built with ❤️ in Qatar</p>
+          </div>
 
+          <div className="hidden md:block" /> {/* Spacer to keep copyright centered */}
         </div>
       </div>
     </footer>
