@@ -33,7 +33,8 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="p-4 rounded-xl bg-white shadow-sm border border-border inline-block">
                   <span className="font-semibold text-primary">Email: </span>
-                  <a href="mailto:info@bitechqa.com" className="text-foreground hover:text-primary transition-colors">info@bitechqa.com</a>
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@bitechqa.com"
+                    target="_blank" className="text-foreground hover:text-primary transition-colors">info@bitechqa.com</a>
                 </div>
               </section>
 
