@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, MapPin, Mail, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Send, MapPin, Mail, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -8,11 +9,48 @@ const ContactSection = () => {
     email: "",
     message: "Dear Joy Team, Please contact me I would like to know more about your Joy App.",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+
+    // Prepare data for Web3Forms
+    const submissionData = {
+      ...formData,
+      access_key: "3dc61ade-d7ad-4829-ba37-94d39619d6b9", // Placeholder - User needs to replace this
+      subject: `New Message from ${formData.name} via Joy App`,
+      from_name: "Joy App Contact Form",
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success("Message sent successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          message: "Dear Joy Team, Please contact me I would like to know more about your Joy App.",
+        });
+      } else {
+        toast.error(result.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -147,9 +185,22 @@ const ContactSection = () => {
                   </div>
 
                   {/* Submit Button */}
-                  <button type="submit" className="btn-primary w-full group">
-                    Send Message
-                    <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <button
+                    type="submit"
+                    className="btn-primary w-full group flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        Sending...
+                        <Loader2 className="ml-2 w-4 h-4 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>
